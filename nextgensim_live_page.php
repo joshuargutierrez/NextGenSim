@@ -1,386 +1,164 @@
 <?php
-$num = $_POST["charnum"];
-$usrpwd = $_POST["usrpwd"];
-$usrsecret = $_POST["usrsecret"];
-# all passwords derived from random word generator https://randomwordgenerator.com/
-$adminpwd = "environmental";
-$secretpwd = "encourage";
-
-# passwords for individual users
-$pwd = [
-  "1" => "consumption",
-  "2" => "decisive",
-  "3" => "position",
-  "4" => "fragrant",
-  "5" => "projection",
-  "6" => "appoint",
-  "7" => "conductor",
-  "8" => "ballot",
-  "9" => "maximum",
-  "10" => "college",
-  "11" => "consider",
-  "12" => "consumer",
-  "13" => "sandwich",
-  "14" => "replacement",
-  "15" => "nationalism",
-  "16" => "accumulation",
-  "17" => "service",
-  "18" => "chapter",
-  "19" => "available",
-  "20" => "borrow",
-  "21" => "physics",
-  "22" => "conventional",
-  "23" => "publicity",
-  "24" => "agency",
-  "25" => "example",
-  "26" => "joystick",
-  "27" => "version",
-  "28" => "posture",
-  "29" => "harmony",
-  "30" => "drawing",
-  "31" => "continuous",
-  "32" => "available",
-  "33" => "reaction",
-  "34" => "television",
-  "35" => "family",
-  "36" => "anxiety",
-  "37" => "bathtub",
-  "38" => "harmony",
-  "39" => "protection",
-  "40" => "interference",
-  "41" => "absolute",
-  "42" => "important",
-  "43" => "access",
-  "44" => "belong",
-  "45" => "monopoly",
-  "46" => "bargain",
-  "47" => "function",
-  "48" => "generate",
-  "49" => "emphasis",
-  "50" => "assumption",
-  "51" => "diplomat",
-  "52" => "evolution",
-  "53" => "career",
-  "54" => "genuine",
-  "55" => "shoulder",
-  "56" => "journal",
-  "57" => "houseplant",
-  "58" => "counter",
-  "59" => "reflection",
-  "60" => "emotion",
-  "777" => "pwd777",
-];
-
-# title
-$position = [
-  "1" => "Presidential Advisor #1",
-  "2" => "Presidential Advisor #2",
-  "3" => "Presidential Advisor #3",
-  "4" => "Regional Representative (1)",
-  "5" => "Regional Representative (2)",
-  "6" => "Regional Representative (3)",
-  "7" => "Regional Representative (4)",
-  "8" => "Regional Representative (5)",
-  "9" => "National Nonprofit Representative 1",
-  "10" => "National Nonprofit Representative 2",
-  "11" => "National Nonprofit Representative 3",
-  "12" => "Local Nonprofit Representative",
-  "13" => "International NGO Representative 1",
-  "14" => "International NGO Representative 2",
-  "15" => "Union Representative 1",
-  "16" => "Union Representative 2",
-  "17" => "Union Representative 3",
-  "18" => "Maghreb Oil Company (MOC) Representative 1",
-  "19" => "Maghreb Oil Company (MOC) Representative 2",
-  "20" => "Maghreb Oil Company (MOC) Engineer",
-  "21" => "Maghreb Oil Company (MOC) Research Scientist",
-  "22" => "Maghreb Oil Company (MOC) Executive",
-  "23" => "Oil and Gas Policy Consultant",
-  "24" => "Water Rights Activist 1",
-  "25" => "Water Rights Activist 2",
-  "26" => "Water Rights Activist 3",
-  "27" => "Anti-Fracking Activist 1",
-  "28" => "Anti-Fracking Activist 2",
-  "29" => "Anti-Fracking Activist 3",
-  "30" => "Minister of Infrastructure",
-  "31" => "Minister of Economic Development",
-  "32" => "Minister of Environment",
-  "33" => "Minister of Interior",
-  "34" => "Minister of Agriculture",
-  "35" => "Minister of Human Services",
-  "36" => "Esmal Oil Representative 1",
-  "37" => "Esmal Oil Representative 2",
-  "38" => "Esmal Ambassador 1",
-  "39" => "Esmal Ambassador 2",
-  "40" => "Port of Esmal Executive",
-  "41" => "Advisor to the Prime Minister (Esmal)",
-  "42" => "Minister of Foreign Affairs",
-  "43" => "Minister of Defense",
-  "44" => "Governor of Region 1",
-  "45" => "Governor of Region 2",
-  "46" => "Governor of Region 3",
-  "47" => "Governor of Region 4",
-  "48" => "Governor of Region 5",
-  "49" => "City Council Member",
-  "50" => "Mining Company Executive",
-  "51" => "Maghreb Oil Company Investor",
-  "52" => "Minister of Finance",
-  "53" => "Student Activist",
-  "54" => "Concerned Citizen",
-  "55" => "Seismologist",
-  "56" => "Journalist - Agrana Bureau Chief",
-  "57" => "Journalist - Chief International Correspondent",
-  "58" => "Journalist - Opinion Columnist",
-  "59" => "Photojournalist - Visual Investigations Reporter",
-  "60" => "Broadcast Journalist",
-  "777" => "Peasant"
-];
-
-# profile text
-$info_text = [
-  "1" => "You have worked in the President's office for eight years and have deep ties to the Ghalibia Party. Your party has worked hard to build Agrana after the removal of the last administration. However, economic development has slowed in recent years. The political climate is growing tense and you are worried about the future of the Ghalibia Party. You believe that fracking will boost the economy and bring new opportunities to Agrana. There has been a lot of misinformation and fear spreading about fracking. After a meeting with Maghreb Oil you feel confident in the safety of fracking and want to bring the economic benefits to light.",
-  "2" => "You have been a member of the Ghalibia Party for 10 years and have experience working in both the Ministry of Defense and Foreign Affairs. In recent years the relations between Esmal and Agrana have improved significantly. Esmal is a regional power and controls the closest sea port to Agrana making them an important ally. You are worried that fracking would put that relationship in jeopardy. However, the many recent power shortages have caused instability within Agrana. If Agrana starts fracking, you will finally have the funds needed to improve the military and security infrastructure. You don’t want to ruin Agrana’s relationship with Esmal; however, the instability caused by the power shortages could escalate, causing internal conflict.",
-  "3" => "You're new to this position but have been working for the government for the past 5 years. Your family has been heavily involved in the Ghalibia Party since its beginning, making you very loyal to the party. After attending a meeting with the Maghreb Oil Company, you feel confident that the fracking deal is going to greatly benefit Agrana economically as well as raise the Ghalibia Party’s popularity. It’s important that you make sure that those opposed to the deal don’t get in the way of it passing. With the upcoming presidential election, you are worried that if the deal doesn’t pass, the Ghalibia party may lose power.",
-  "4" => "You grew up in a small farming community in Northern Agrana, one of the many small farming communities making up the prominent agricultural industry of your Region. The vast and wide open land of Region 1 has made it an area of interest for industries such as oil. However, because the lands are protected, none of the proposed fracking wells are located in your region - so you don’t have much of an opinion on the matter and in fact see the benefits of energy independence. The people of Region 1 fear that the government will strip land protectections if the oil industry takes off in Agrana and that their lands will eventually be drilled for oil - perhaps irrational, but a concern nonetheless.",
-  "5" => "You are from a wealthy family with deep political ties in Agrana who helped establish the Ghalibia Party. You’ve seen how the oil industry has developed and built Esmal’s economic and regional influence. Agrana City has been experiencing power outages far greater than ever before, causing panic and fear throughout the city. You believe that fracking in Agrana will solve the power issues and aid in the economic development of Agrana City, bringing stability to your region.",
-  "6" => "Half of the proposed fracking wells will be scattered throughout Region 3, one of the least developed regions in Agrana. You have been promised that by bringing fracking to District 3, you will be bringing new jobs and vast economic opportunities. However, the government has made many promises to your region before that weren’t kept - your region has never been a priority compared to other parts of Agrana. You don’t trust that they care about your people or have their best interests in mind. Additionally, sharing a border with Esmal has caused some security concerns in the past, and you fear those may bubble back up with such a large and controversial operation potentially coming in.",
-  "7" => "You are a member of the Ghalibia Party. However, in recent years, you have grown frustrated with the party’s politics and treatment of Region 4.  You are questioning whether the Ghalibia Party really cares about your region. The rural and agricultural communities in Region 4 rely heavily on a limited supply of fresh water. A quarter of the proposed fracking wells will be located in Region 4, and the large amounts of water needed for fracking is a real concern to the interests of your people. While the potential prospects and income from fracking are appealing, you are afraid that fracking is not in the best interest of Region 4.",
-  "8" => "You are from Tagan, a small but up and coming city in Region 5. A fourth of the proposed fracking wells will be located in your region. You have  been working on the development of urban infrastructure but are in need of funding for the projects. Between the power shortages and lack of economic opportunity, your region is unstable and you are desperate to bring stability back. After a meeting with the Maghreb Oil Company, you have been promised that fracking would bring the funds needed for urban development projects and that the Maghreb Oil Company would locate it’s secondary Agrana office in Tagan. ",
-  "9" => "Your NGO has been doing work in the least developed regions of Agrana, offering social programs for women and children, helping to create and secure low-paying jobs for the unemployed, and advocating for agricultural workers. You have seen how the Ghalibia Party has failed the people of Agrana time and time again. The Ghalibia Party wants to push the narrative that fracking will bring economic prosperity to Agrana and help in funding social programs and building up the economy. You don’t trust that the government will invest in the social programs that so desperately need funding. You would be in favor of fracking but you just don’t trust the current government.",
-  "10" => "Your NGO has been running grassroots campaigns for the Al Shaeb Party throughout Agrana. You are from Region 3 and have spent a lot of time holding forums and discussing the regional issues there. Your region is pretty evenly divided between the Ghalibia and Al Shaeb Party; however, during the most recent drought, many farmers have grown frustrated with the government as they have received no assistance in these difficult times. The vast majority of those you’ve talked to oppose fracking, even many who have been members of the Ghalibia Party their whole lives - they don’t trust the government and they definitely don’t trust a money-hungry oil company. It’s important that Agranians voices are heard at both the local and national level. #YourVoiceIsYourPower",
-  "11" => "You are a member of the Al Shaeb Party and were born in Region 1, where you gained a passion for land conservation. Your NGO has been working on sustainable farming efforts throughout Agrana and has been making some real progress. You’ve supplied farmers with tools to install water catchment systems, you’ve encouraged seed saving of varieties well-adapted to the dry climate, and you’ve educated local farming communities on the importance of preserving and protecting the land. You are worried that fracking will hinder your efforts and harm the agriculture industry. If they try to drill in your region, farmers may feel pressured to sell farmland to a non-Agranian oil company - and a lot of precious water will be diverted to fracking sites. ",
-  "12" => "You work for a local NGO that does work in Region 3 and 4. You grew up poor in a rural area, with an agricultural family constantly facing the effects of drought. You’ve focused on issues of education and rural development. Many of the people you serve would be affected by fracking - some positively, and some negatively. While it would bring in jobs, you’re not confident locals would be the ones getting that employment, and you fear some of the environmental rumors you’ve heard about fracking. You would like some funding increases, which drilling would possibly bring, but again - you’re not confident.",
-  "13" => "You work for a global organization that represents energy companies in developing countries - ensuring they are properly regulated, that they are using fair labor practices, and that they have access to appropriate resources, knowledge, and materials. The Maghreb Oil Company (MOC) is very prominent in the region and operates out of four different countries. You have worked in two of those four countries on improving workers’ rights and safe practices. MOC is not always known for having the safest practices. You are worried that they have not done proper testing of the equipment and that the technology is not suitable for use in Agrana.  ",
-  "14" => "You work for a human rights organization based in North Africa and the Middle East. You have been working in Agrana with the Al Shaeb Party to amplify the voices of those who have been marginalized and ignored by the current government. You have been assisting in grassroots campaigns and movements to enact social change. The government has been promoting the jobs that the fracking deal will create, which would be a positive for many Agranians. However, you believe that drilling is a ploy for the government to take advantage of Agranians for their own benefit. ",
-  "15" => "You grew up in a farming community in Region 3. From a young age, you were out on the field helping your mother grow crops and experienced the difficulty of farming with limited water. When you were old enough, you joined the newly established Farmers’ Union where you fought to protect farmers from discrimination, chemical exposure, and the right to clean water. If the fracking deal goes through, your union plans to go on strike as the government would be possibly depleting and contaminating agricultural water sources. ",
-  "16" => "Members of your Handy People Union are mostly from Region 2 and 5 and work in maintenance and mechanic industries that would likely be contracted to work on oil and gas wells. Your union members follow the money and are interested in drilling, as it would provide potential job opportunities and increase regional income. The economic benefits for members of the Handy People Union are far more important than the environmental risks others won’t stop complaining about. You, as the representative, are famously stubborn and care about what’s affecting you now, not about what might affect you later. ",
-  "17" => "You are a representative of the Oil and Gas Workers Union in Esmal. You’ve been sent to Agrana to meet with related Unions and Regional Representatives to give them information and perspective on this potential oil and gas project in their country (and to sway them toward sticking with importing from Esmal Oil).",
-  "18" => "You have been working for MOC for over 20 years and have been helping with the development of hydraulic fracturing (fracking) technology. Since it is a new technology to the region, your company is eager to break through the market. You believe that fracking is the future of the oil industry and that Agrana is an ideal location for it.  The vast open lands are rich with shale oil deposits and the lack of established oil and gas wells in Agrana allows for MOC to frontier the industry. Esmal is one of your biggest oil competitors, and you want to begin fracking in the region before they do.",
-  "19" => "You are a newer employee to MOC and are not familiar with the ins and outs of fracking. However, you have experience in the oil industry. You spent the last five years working for MOC’s biggest competitor, in Esmal, and have spent time in Agrana in past jobs. You are familiar with the business dealings, culture, and politics of the country. Because of your experience you have been promised a promotion and a top position in the new office in Agrana. You believe that if this deal goes through, the oil and gas industry would boom in the region and your career would greatly benefit from the new position.    ",
-  "20" => "You’re an engineer for MOC and have done a lot of work on the design of hydraulic fracturing (fracking) wells. You are being sent to Agrana to explain the technology behind this type of drilling. You have dedicated your life's work to this technology and believe that it’s the future of energy and oil/gas production. Your scientific understanding is key in reassuring and persuading the government that fracking is a safe and effective means of sourcing natural gas energy. ",
-  "21" => "You are a research scientist for MOC and have been sent to Agrana to survey the proposed drilling sites. You have been heavily involved in the research, creation, and testing of natural gas wells. The landscape in Agrana is vastly different from the typical sites where fracking is used, and would be a great opportunity to try new and safer technology. However, MOC plans on using older equipment. You’re very skeptical of this plan and wish they would move toward safer tech.",
-  "22" => "You are an executive at MOC and were sent to make sure the deal goes smoothly. The expansion into fracking and into Agrana would give your company an enormous boost and great visibility in the international market. You are worried that the discussion around fracking in Agrana has become filled with environmental concerns and government distrust. You want to make sure to highlight the economic benefits that fracking would bring to Agrana. Plus, having a stake in natural gas in Agrana would put MOC ahead of your biggest competitor, Esmal Oil. ",
-  "23" => "You grew up in northern Africa and majored in Petroleum Engineering. You founded a couple of small, regional oil companies and eventually became a consultant on oil and gas policy. You are currently working on drafting the Oil Extraction Policy for Agrana’s government. You have been doing this work for a decade and you know that the language you use to write this policy may have a strong influence on members of congress to be in favor of the fracking deal. ",
-  "24" => "You are from Region 3, one of the most arid regions within Agrana. Water resources are scarce and you fear that fracking in Agrana will contaminate and/or dry up the already limited water resources. Your family farm has been struggling as water resources become more difficult to access and the annual rainfall decreases. You are especially concerned by the proposed fracking well locations and their proximity to both your family farm and the already limited groundwater sources in the region.  ",
-  "25" => "You are originally from Agrana City, and as you’ve grown up you’ve seen the development and changes that have been made in the city. The population has greatly increased, placing strains on clean and potable water resources, as there is a much higher demand. The previous government failed to properly maintain water resources, an issue you and many Agranians are passionate about. The government has not been taking your concerns seriously and you fear that they will go through with the fracking deal and place the already scarce water resources in danger - making them both more scarce and potentially polluted.",
-  "26" => "You grew up in Region 3 in an impoverished community that was forced to drink contaminated water sources out of necessity. You weren’t the only one to experience this inequality, but it left you with a bitter attitude towards the government and a desire to prevent that from ever happening to minority communities in Agrana. The previous government failed to properly maintain water resources, and the current government has not been taking your concerns seriously. You fear that they will go through with the fracking deal and place the already scarce water resources in danger.  You are working closely with community leaders to spread the word among the citizens of your region.",
-  "27" => "You are a farmer from Region 3 but in recent years the arid climate has proven more difficult than ever to your crops - climate change is greatly affecting this part of the world! You are lucky to have access to groundwater on your land, but your farm is located very close to a few of the proposed fracking sites and you are worried about the potential environmental implications like earthquakes and, most importantly, water use and contamination. You are worried the government will ignore these factors - and the larger implications of burning fossil fuels - and be drawn to the revenue from oil and gas. You’ve recently teamed up with other community members to protest the drilling plans, and you’re willing to go to extremes to keep the enemy out of your community.",
-  "28" => "You are from Region 1 and have fought hard to keep your lands protected. You are the only region that has been able to get land protections in place. The less arid climate and vast open land of your area is one that could easily be exploited. You do not trust that the government will keep their promises and you see fracking as a huge threat. If the fracking industry takes off, the government may change protection statuses of the land,  allowing drilling to extend into Region 1 - depleting the water resources and ruining the land as they go. ",
-  "29" => "You are a professor of environmental studies at the University of Agrana and are passionate about the use of renewable energy sources. You want Agrana to become energy independent, but the only way to do that without adding to the climate crisis is through renewable energy production. The government has become obsessed with the potential of economic growth, usually at the potential cost of Agranians' well being and the well-being of the planet. Fracking is their worst, most damaging economic endeavor yet. You’ve recently gotten a group of your students and colleagues to join you in voicing your concerns by writing to the government and holding protests on your university campus.",
-  "30" => "After meeting with the Maghreb Oil Company, you are impressed by the profits that the Agranaian government will get from the deal. However, you are sceptical and worried that drilling will actually deteriorate the existing and fragile infrastructure in Agrana before Agrana is even able to make a profit as an oil exporter. While the income and economic opportunity might be good for the government, you are worried it won’t be good for the people. You want to learn more about how the money will be spent and how it will impact infrastructure.",
-  "31" => "You are excited about the prospects of fracking in Agrana. You believe that fracking will put Agana on the map as an oil exporter. After a meeting with the Maghreb Oil Company you feel confident in a partnership with them and have discussed what the deal would mean for Agrana economically. The president’s office has put a lot of pressure on your ministry recently - the economy has remained stagnant  and the whole country is suffering. Fracking would bring energy independence and an opportunity for Agrana to become an oil exporter. It would also bring new jobs and economic growth, especially to some of the least economically developed regions, like Region 3 where you grew up. You want to bring more economic opportunity to the Agranian people, especially those outside of Agrana City.",
-  "32" => "You grew up in Region 1 and have a strong connection to the environment, like most Agranians in your region. You worked really hard alongside your fellow Region 1 Agranians to get land protections. You got into politics with the intention of continuing your environmental work, and you want to continue to help Agranians across the different regions gain land and environmental protections. Fracking poses the biggest threat yet to Agrana’s fragile environment. The arid climate is not suitable for the water-demanding process of fracking. Water contamination, habitat loss, and possible earthquakes caused by fracking pose huge threats and will eventually harm the people of Agrana. Not to mention - burning fossil fuels is not the solution to the climate crisis.",
-  "33" => "You grew up in Region 5, working in local and regional government for decades. You became involved in national government when you reluctantly accepted the President's offer for the position as Minister of Interior. In 2015, you signed an agreement with the Minister of Energy that entails the use of scientific data to help governors meet the challenge of balancing Agrana’s needs for energy resources and a clean, healthy environment. With the water scarcity, poverty and awful infrastructure that your country experiences, you consider the status of Agrana to be a national emergency. You are interested in the possibility of only having one fracking well per region - this will not only produce energy resources but will minimize the damage done to the environment and to people. Thus, your goals would align with the agreement you signed in 2015. ",
-  "34" => "Agriculture is one of the most prominent sectors in Agrana. You are responsible for ensuring the prosperity of the agriculture industry. Many regions have been facing drought and have been having to rely more heavily on ground water resources. Originally, you were in support of the fracking deal; however, after attending a meeting with the Maghreb Oil Company, you are worried that this deal would require  water and land resources that are vital to the agriculture industry. Your political party, the Ghalibia party, is in support of the deal and you are worried what it might mean for agriculture in Agrana.  ",
-  "35" => "You were born and raised in a rural and less developed community in Region 2. You managed to attend college in the wealthier part of the region, where you majored in social services. You have devoted your life to social programs, education, and helping marginalized populations within Agrana. Recently you have become increasingly concerned by the government's actions and disregard for the people of Agrana. The President’s office has promised that some of the revenue from fracking will be allocated to your office, which is in desperate need of funding. ",
-  "36" => "You have been working for Esmal Oil (EO) for the past 15 years and helped broker the oil deal between EO and Agrana. You have a good relationship with the Agranian government but recently they have become frustrated with EO. The volatile oil prices have caused oil and power shortages throughout Agrana. Recently EO has been struggling financially and losing Agrana as an importer would be a major loss. You are being sent to Agrana to convince them to not frack with MOC and to convince them to stay loyal to EO. If you can’t convince them to vote against the deal, your job might be on the line. ",
-  "37" => "You are a research scientist for Esmal Oil (EO) and have been working on developing fracking technology in Esmal. You are a few years behind the Maghreb Oil Company (MOC) and have yet to start wide scale testing on your technology. EO sent you to Agrana to listen to what MOC has to say. You want to make sure that they understand the risks of working with a larger oil company - make them second guess this deal.   ",
-  "38" => "You have been an ambassador to Agrana for a long time. Relations between your countries have not always been good, but in recent years they have been improving. Oil is your country's largest industry and the Maghreb Oil Company (MOC)  is your biggest competitor. You are worried that if Agrana starts fracking MOC would become the region's largest producer of oil. Also, if Agrana goes through with the MOC deal, the relations between your countries could get complicated. ",
-  "39" => "You have been recently assigned as an Ambassador to Agrana. You have a background working on trade deals and economic dealings between Esmal and other countries. If Agrana votes in favor of drilling, Esmal will have no other choice but to apply economic pressure on Agrana. Agrana relies heavily on the Port of Esmal for both importing and exporting, and Esmal may limit or cut off their access to the port if the deal goes through. Esmal could also potentially cut off trade with Agrana - Esmal is Agrana’s largest importer of agricultural goods and cutting off trade would greatly impact Agrana’s economy. The Esmalian government does not want to apply economic pressures, but they won’t hesitate if Agrana goes through with the deal. ",
-  "40" => "You are an executive at the Port of Esmal, which is an important location in North African trade. You are excited about the potential of Agrana exporting oil - your port would get tremendous business! They already use your port for small agricultural exports, but oil exports would make your location even more important in regional trade. ",
-  "41" => "You are the Advisor to the Prime Minister of Esmal and were sent on behalf of the Prime Minister to warn Agrana of the potential consequences of opening up their natural gas economy. Esmal has a military and economic advantage over Agrana, and while you don’t want any conflict with Agrana, you want to remind them that your country is more powerful. Oil is an essential part of Esmal’s economy and you believe fracking is the future of the industry. The last thing you want is your country's largest competitor  - MOC - fracking next door.",
-  "42" => "You have been the Minister of Foreign Affairs for the past eight years and have worked very closely with the Esmalian government. In recent years, Agrana and Esmal’s relationship has been good, and you believe that Esmal is an important ally for Agrana. They have a large military and have a lot of power in the region. You worry that fracking will jeopardize Agrana’s relations with Esmal - your country gets most of their oil from Esmal. However, fracking could lead to Agrana becoming an exporter of oil, and would open up Agrana’s economy to more of the world.",
-  "43" => "You have been the Minister of Defense for the past eight years. Throughout your time as Minister of Defense, you have learned that Agrana is lacking a proper military and defense system. If Agrana begins exporting oil, you would have the proper funds needed to build up Agrana’s defense system. It’s very important that this deal passes and that you get the funding needed for Agrana’s dense system, especially if Agrana is going to be an oil producer.",
-  "44" => "While attending university in Agrana City, you got involved with the Al Shaeb Party, and after graduating you returned to Region 1 to work for their regional office. You helped secure land protections for the region and ended up getting involved in local politics, where you eventually became governor. Fracking poses a huge threat to all of the work you have done in the region - for both the people and the land - and the work of your fellow Al Shaeb Party members throughout Agrana. Big oil doesn’t understand the needs of the people and blatantly disregards the environment.",
-  "45" => "You are the Governor of Region 2 and are a member of the Ghalibia Party. You have always aligned with the Ghalibia Party's economic policies and were originally in favor of an oil and gas boom in Agrana. However, you are growing skeptical of the government's intentions - you are worried that they are no longer serving the people but themselves. On the other hand, Agrana City has faced massive power outages that have caused a lot of issues for Agranians. While you are skeptical of the deal, you are desperate for the revenue that will help these power outages to stop.",
-  "46" => "You are the Governor of Region 3 and  a member of the Al Shaeb Party. You have been working on efforts to preserve water for the constituents of your region, as water plays a vital role in the region’s prominent agriculture industry. Region 3 has been facing a permadrought that has made it difficult for farmers to access the water needed for their crops. You are very concerned about the amounts of water used in fracking, but there is pushback from some of your constituents. They are enticed by the potential economic benefits of natural gas. You understand where they are coming from, as the region has been suffering economically, but you are still unsure of the effects this industry would have on local water resources.",
-  "47" => "You are a member of the Al Shaeb Party and are incredibly concerned by the Ghalibia Party's actions. You usually disagree with the Region 4 Representative, who is a member of the Ghalibia Party, but recently you have been finding common ground on issues. You are both bothered by the governments disregard of your region. You feel that you are constantly cast out and ignored by the government. Your region will be exploited for oil if this deal goes through and will receive nothing in return. Their promises of economic growth and new jobs seem empty.  ",
-  "48" => "You are an up-and-coming politician in the Ghalibia Party and have recently been elected governor. You are excited about the fracking deal! You met with the Maghreb Oil representatives and are excited by the economic prospects that this deal would bring to Region 5. Your administration has been working on urban and economic development and this revenue would really help. The Maghreb Oil Company plans on putting one of its offices in Tagan, the largest city in your region. You feel confident that the people of your region will also be in support of drilling - you don’t see how they couldn’t be.",
-  "49" => "You grew up in Region 5, attended the University of Agrana where you studied Urban Planning, and unexpectedly became involved in politics, eventually becoming a community political leader of Region 5. As part of your leadership goals, you have been hosting weekly meetings with residents of Region 5 that focus on debunking environmental myths related to fracking, such as “fracking causes earthquakes”. There has been a high attendance rate and you feel you are successful in hosting these educational meetings. ",
-  "50" => "You are from Region 1, but you attended university in Esmal. While you were in Esmal, their oil industry took off. You saw what it did for Esmal’s economy while the people in Agrana were struggling to survive during the transition from the last government. You stayed in Esmal and worked for a mining company, and now you are back in Agrana doing similar work. You wished that Agrana would be more open to the oil and mining industries - you believe that it would greatly benefit the economy and the people.  ",
-  "51" => "You are a member of the Ghalibia Party and an investor in the Maghreb Oil Company (MOC). You have been hoping that MOC would extend it’s business to Agrana for years! You have seen how the oil industry in Esmal has taken off and boosted their economy, and you want the same for Agrana. Fracking is new to the region and Agrana is a perfect place for opening a new natural gas industry - the vast open land is rich with shale oil deposits! You are optimistic about this deal and are in full support of fracking.",
-  "52" => "You don’t consider yourself a very political person, but are a member of the Ghalibia Party. You were reluctant to accept the position of Minister of Finance but feel like you have done a good job so far. It’s a difficult job, as Agrana is lacking in funding for many government sectors. You have been working on a plan for how the revenue from fracking will be allocated, and it’s been difficult. There have been a lot of promises made to people that are likely not to be funded. You are worried that the plan and allocation of funds will cause a lot of issues. You are making the plan according to the President's desires, but a part of you feels like it's an unfair plan. You don’t want to get involved in political fights but you are worried that you may have to. ",
-  "53" => "You are a university student in Agrana City and are an active member of the Al Shaeb Party. You are frustrated with the government and their inability to serve the people of Agrana. This fracking deal seems like a ploy by the government to exploit the people for personal economic gain - not to mention the catastrophic impacts fossil fuels have on the climate. You have been working on planning a protest/demonstration in Agrana City against big oil and the government. ",
-  "54" => "You are a doctor from Region 2 and you work in a hospital in Agrana City. The hospital you work in is located in a poorer area of the city and experiences frequent power outages. The power outages have made your job incredibly difficult and have greatly affected the efforts of healthcare workers across Agrana City. You are worried that if this deal doesn't pass, and revenue isn’t brought in to upgrade Agrana’s infrastructure, the power outages will continue with no end in sight. You are hoping that the government of Agrana will do what is best for the people and pass this deal. ",
-  "55" => "You are a Seismologist from Agrana who is research professor at the University of Agrana. You are incredibly concerned about the effects that fracking may have on Agrana.  You’ve read studies of earthquakes in the United States caused by fracking operations. You believe this should be more of a concern in your country, but oil companies and their allies always play this down. You want to support the deal, as you know that fracking can be a safe and effective means of extraction, but the risks need to be properly weighed and not denied.",
-  "56" => "You grew up in Region 2 in one of the wealthiest communities of the capital. You now have 25 years of experience as an editor and reporter to The Agrana News, inspired by learning about the suppression of journalists by former government officials. In your career, you have overseen and contributed to coverage about issues such as human rights and democracy, and you are now overseeing coverage from your fellow correspondents about the fracking deal and its consequences. Your number one client is the public of Agrana and you do everything in your power to make sure that the public is educated about current events at whatever cost.",
-  "57" => "You grew up in the Northeast of Region 3 very close to the border. From a young age, you were always warned by your parents to be careful whenever you would go out and play. They would tell you about the conflict between Esmal and Agrana, which later sparked an interest in international relations. At the University of Agrana you majored in Journalism with a focus on International Relations. You have 15 years worth of experience reporting from international posts for different news anchors. You have become a world-renowned conflict reporter and for the past 8 years you have been the Chief International Correspondent for The Agrana News and are currently stationed in Esmal. ",
-  "58" => "From a young age you have always been very opinionated about societal issues. Though you were raised in Region 2, your parents, from Region 3, would often share stories about their hardships living in Region 3 with you. These stories lef you to become involved in journalism at age 19, and you have been an Op-Ed Columnist for The Agrana News for five years. You are following the fracking deal very closely and have published several opinion pieces that argue in favor of the fracking deal. Your main argument is as follows: the fracking deal will pull large sectors of society out of poverty, as oil and gas will provide economic benefits and help move the country forward. The country must suffer a little bit more before it prevails!",
-  "59" => "You grew up part of the wealthy community in Region 2 in the capital city of Agrana, with photojournalist parents. You remember they would cross the borders into Esmal to capture photographs of the conflict. It was common to see their photojournalism on the walls of your apartment, and you wanted to partake in this form of activism and become a photojournalist yourself. You have been part of the visual investigations team at The Agrana News post for six years. You are currently focusing on the fracking deal and have been capturing intriguing photographs of the buildup to the vote.",
-  "60" => "You’ve lived in Agrana City your whole life and have always dreamed of being on TV. Now, you are a reporter for Agrana Reports Live!, a TV program that reports on local news (and gossip). You don’t have much of an opinion on oil and gas, as long as TV is still running and your life can go on as planned. Others on your program really just want high ratings and a popular household name. This fracking deal seems like a good opportunity to get some good programming on the air!",
-  "777" => "This is a test."
-];
-
-// Goals
-$goal_text = [
-  "1" => "Frack, for the future of Agrana!",
-  "2" => "Encourage the President to weigh all the pros and cons - and hold off until the time is right.",
-  "3" => "Use your skills of persuasion to get this passed.",
-  "4" => "Resist oil and keep land protected in your region, if it will please your constituents.",
-  "5" => "Embrace oil in order to better your country!",
-  "6" => "Vote against fracking deal.",
-  "7" => "Reduce the proposed number of wells in your region, or resist drilling altogether.",
-  "8" => "Get the fracking deal to pass! ",
-  "9" => "Resist the deal unless the government can prove what they promise.",
-  "10" => "Oppose fracking and ensure that Agrarian voices are heard and valued!",
-  "11" => "Resist drilling at all costs!",
-  "12" => "Approach everything with skepticism - and put your people first.",
-  "13" => "Find out more about MOC’s intentions and advocate for what you think would be best for Agrana. ",
-  "14" => "Oppose fracking and help amplify the voices of Agranians!",
-  "15" => "Resist drilling!",
-  "16" => "Go to the streets and advocate for the deal - hand out flyers, talk to locals, and tell them what’s right!",
-  "17" => "Educate Agrana on your industry and advocate for Esmal Oil.",
-  "18" => "Vote in favor of the fracking deal!",
-  "19" => "Get the deal done so you can move up!",
-  "20" => "Persuade through your scientific knowledge and appeal to anti-fracking activists. ",
-  "21" => "Wait and see!",
-  "22" => "Get the deal through at the lowest cost to you possible.",
-  "23" => "Create a policy that sways members of congress to vote in favor of oil and gas. ",
-  "24" => "Vote against fracking deal - water is life!",
-  "25" => "Fight the deal!",
-  "26" => "Find a way to get your voice heard - no drilling!",
-  "27" => "Keep drilling out - no matter what. For your farm and for the climate!",
-  "28" => "Advocate for your land and keep big oil OUT.",
-  "29" => "Use your voice and knowledge to advocate for renewables!",
-  "30" => "Get on board with the deal - but only if the pros will outweigh the cons.",
-  "31" => "Sign the deal and get drilling!",
-  "32" => "Keep oil and gas industries out of Agrana.",
-  "33" => "Convince the powers that be to go through with your idea. ",
-  "34" => "Voice your concerns and listen to the other perspectives in Agrana.",
-  "35" => "Vote on a deal that ensures the safety and well-being of disadvantaged Agranians.  ",
-  "36" => "Convince Agrana to not Frack and to continue buying oil from EO.",
-  "37" => "Educate the Agranaian government on the oil and gas industry and convince them to vote against drilling with MOC.",
-  "38" => "Convince Agrana to continue importing oil from Esmal. ",
-  "39" => "Warn the Agrarian Gov of the potential consequences!",
-  "40" => "Voice your support for the deal!",
-  "41" => "Assert your power and get Agrana to put the brakes on this deal.",
-  "42" => "Weigh the pros and cons of the deal but err on the side of caution, this could lead to unwanted conflict between Agrana and Esmal. ",
-  "43" => "Vote in favor of the fracking deal. ",
-  "44" => "Oppose fracking and keep big oil out of Agrana!",
-  "45" => "Weigh the pros and cons of fracking and vote based on what you think is best for the people of Agrana.",
-  "46" => "Get a better understanding of the potential environmental impacts.",
-  "47" => "Stop the deal from going through and try to work with the Region 4 Representative. ",
-  "48" => "Support this deal!",
-  "49" => "Educate others about the benefits of fracking - and debunk the myths so this deal gets passed!",
-  "50" => "Advocate in-favor of fracking and try to convince others of the economic benefits it would bring.",
-  "51" => "Promote the benefits of fracking and get this deal to pass. ",
-  "52" => "Learn more about promises made by the government and their true intentions.",
-  "53" => "Use your voice to oppose fracking!",
-  "54" => "Support drilling.",
-  "55" => "Neutral - you need scientific evidence.",
-  "56" => "Give people the information they need to make better decisions about their lives and society. ",
-  "57" => "Give people the information they need to make better decisions about their lives and society.",
-  "58" => "State your opinions - it has a strong influence! ",
-  "59" => "Give the public the information they need to make better decisions about their lives and society - through pictures.",
-  "60" => "Report on the juiciest details - you want fame!",
-  "777" => "Survive."
-];
-
-# Insider Info
-$insider_text = [
-  "1" => "New polling information has come in, and the President’s approval rating is slowly declining. You believe that economic development would boost his ratings immensely, ensuring that he will get reelected and that you will - hopefully - keep your job. <br><br>You also recently read a study from an American university that found more than 90% of wastewater from hydraulic fracturing sites is safe, and with proper treatment, fracking fluids could be recycled and used for agricultural irrigation - something Agrana needs badly. <br><br>Consider promoting the economic benefits and downplaying misinformation by talking to the media. ",
-  "2" => "While walking from one meeting to another, a representative from MOC casually tells you a startling statistic about how much this project could weigh on infrastructure (a single well puts as much pressure on local roads as nearly 3.5 million car trips!). <br><br>Then, while speaking with the President, you learn that the oil company is planning to use somewhat outdated and rather inadequate drilling technology in order to cut costs - you’re no environmentalist, but you fear potential gas leaks and worry that this would affect the President’s already declining approval ratings. Plus, does cutting costs say something about Agrana’s value and importance to this oil company?",
-  "3" => "You’ve heard from a low-level MOC representative that the company may make a large donation to the Ghalibia party if the deal goes through. This could be huge! <br><br>You’ve also heard that there may be farmer strikes and protests if it goes through - a hold-up of food sources and potential unrest don’t sound appealing, but it may be worth the risk...",
-  "4" => "You’ve heard that water from fracking can be recycled and used for irrigation in agriculture. This sounds like a great idea for Agrana, since so many people are concerned about water use in the fracking process! Farmers all seem pretty resistant to this idea, but perhaps you can persuade a portion of them. <br><br>On the other hand, there is a local election coming up, and you want to keep your constituents happy.  You’re willing to resist a drilling deal if it will get you reelected. ",
-  "5" => "You have just found out that protests against fracking have broken out in downtown Agrana City. You are surprised and thought that the people of Agrana City would be in favor of drilling and the revenue it would bring. You were hoping the deal would bring stability to the country by guaranteeing a stop to the widespread power outages, but others aren’t seeing eye-to-eye with you. <br><br>The protests need to stop before they get out of hand - telling people what they want to hear and making some general empty promises that will calm them down may be the best bet. That’s ethical enough, right?",
-  "6" => "You have just been informed by an executive from the Port of Esmal that the Esmalian Government may shut off Agrana’s access to the port if the deal passes. You are worried how this may affect your region's economy. Many farmers in Region 3 use that port for agricultural exports. The fracking deal may lead to more consequences than benefits. <br><br>The agricultural community in your region is your biggest concern - protect them at all costs!",
-  "7" => "You are fed up with the Ghalibia Party feeding you lies, so you take matters into your own hands. You begin to host secret meetings with scientists and activists who are knowledgeable about this issue. You discover that spills during the handling of hydraulic fracturing fluids and chemicals can reach groundwater resources - in an area of the United States, the water in 141 water wells near fracking sites found that methane was detectable in 82% of drinking water samples. This scares you. <br><br>Fight against the deal unless the proposed number of wells in your region are appropriately reduced - and moved far from anyone’s water sources. You still want that revenue, but not undrinkable water.",
-  "8" => "After talking to an old friend who works in the Ministry of Economic Development you have found out some new information regarding the fracking deal. The majority of money from fracking will be allocated to security and military projects and improvements. You are worried that Region 5 won’t see as many funds as you had originally been promised. Even if you don’t receive as many funds as promised your region might still benefit from this project, but you’re not so sure...",
-  "9" => "After a meeting with a contact who works in the government, you have become increasingly worried about the outcome of the deal. The majority of the revenue from drilling would potentially be spent on military and security projects. Very little money would be allocated to social services and programs, a sector severely lacking the funding needed to keep the few services offered running. The government has once again ignored the real needs of the country.",
-  "10" => "You have been a key member in a group effort with various NGOs, local farmers, and activists to plan a strike. If the government goes through with the deal, farmers in both Region 1 and 3, the largest producers of agricultural goods in Agrana, will go on strike - halting the food supply chain in Agrana. This would be incredibly damaging to the Ghalibia Party. Food shortages would lead to an unstable political climate, and the energy shortages have already made tensions between the government and the people high. A food shortage would only make tensions worse. ",
-  "11" => "Region 1 is the biggest producer of agricultural goods along with Region 4. You have partnered with an NGO doing grassroots campaigns for the Al Shaeb Party as well as local farmers in both regions and to plan a strike if the government goes through with the deal. The food supply in Agrana will face severe shortages unless they meet demands. You hope that the threat of a strike is enough to prevent them from going through with the deal.",
-  "12" => "Environmental concerns aside, you’ve done some research and found that a fracking operation can require quite a lot of infrastructure - pipelines, compressors, fractionation facilities, petrochemical facilities, power plants and stations, processing plants, pumping stations, and storage facilities. Installing all of this would create many jobs - temporarily. You know some of the people you serve would be enraged by this infrastructure taking up space on their land. <br><br>Also, a Maghreb Oil Representative has offered to donate a large sum of money to your nonprofit if your organization openly supports fracking. While ethically questionable, taking them up on this offer would allow you to rejuvenate underfunded programs…",
-  "13" => "You have just found out new information from a contact you have at Maghreb Oil Company. They informed you that the fracking equipment they plan on using in Agrana is somewhat outdated and worn. There are a lot of potential dangers associated with using old technology. The likelihood of the wells being weaker is higher, which increases the chances of gases or liquids reaching and contaminating groundwater resources. This concerns you greatly - and sounds like a classic case of environmental injustice.",
-  "14" => "A source from the Maghreb Oil Company has informed you that they plan on bringing in a lot of MOC workers from other parts of North Africa as opposed to hiring Agranians. Fracking will not bring as many economic opportunities as originally promised. <br><br>Also, because these laborers would be coming from elsewhere, MOC plans on paying them far below the normal wage in Agrana - hardly enough to live on. Another human rights issue on the horizon!",
-  "15" => "You’ve been in contact with Farmers’ Union members in a country to the west where some fracking has begun. Some tell you of the hardships and water shortages they have faced due to the oil industry coming into their area - they’ve drilled quite densely there and used about 6 million gallons of water per well. Other farmers tell you that they haven’t been very affected, and in fact have gained from a boost in the economy (nothing they say can change your mind, though). <br><br>You are informed that the government is aware of your planned strike through Regions 1 and 3 and fear your potential actions. Do what it takes to push through the powers that be and protect farmers! #Resist! ",
-  "16" => "An oil company representative visited your union headquarters and told you that many of the environmental fears have no widespread science or proof to back them up. He assures you that there is nothing to worry about. He makes the point that fracking itself takes only 3-4 days of a well’s lifetime, while the extraction of oil and gas can last for 20-40 years and is proven to be very well-regulated. This is good information to share! <br><br>He seems like a good guy and made you feel like part of his team, so you take his word for it and double down in your local efforts to push for drilling.",
-  "17" => "You’ve always heard that MOC wasn’t trustworthy, but you’ve never experienced that for yourself. However, a friend in the industry tells you that MOC will not publicly share what chemicals they use in the fracking process - citizens want to know what cocktail will be potentially going into the ground to break through the shale, and MOC’s secrecy makes you wonder about their proprietary mixture… <br><br>Esmal Oil has always been fairly transparent with clients and citizens. Make sure Agrana knows that.",
-  "18" => "You’re noticing a lot of pushback from many citizens and some politicians in Agrana - they don’t trust the fracking process and they definitely don’t trust big oil companies. It’s your job to advocate for this industry, so you start spreading correct information about fracking: <br><ul><li>Natural gas (which is most of what will be drilled for in Agrana) burns cleaner than oil and coal</li><li>Fracking uses less water than coal</li><li>Operations are temporary - fracking itself is only 3 to 4 days of a well’s lifetime, which can last 10 to 20 years!</li></ul>",
-  "19" => "You learn that MOC would potentially bring in labor from other parts of North Africa, paying them far below minimum wage in order to cut costs and NOT employing as many Agranians as was discussed. <br><br>You worry that if this actually happens, the consequences will fall onto you, as you will be stationed in one of the main offices in Agrana. You don’t want to be in the middle of a scandal, protests, or a potential human rights issue.",
-  "20" => "You learn that your company is planning to use older hydraulic fracturing machinery to drill the wells in Agrana in order to cut costs, saving most of the newer technology for future endeavors in wealthier and more important nations. You know that the older machinery isn’t as effective at preventing leaks, spills, and methane emissions (many other companies are installing methane-capturing technology!), but you don’t have too much of a final say in what happens. <br><br>Methane emissions concern you, though: recent research in the United States, at Cornell University, found that increasing methane in the atmosphere (which science shows contributes to climate change) can be traced back to shale oil and gas - from fracking. You don’t want this on your conscience. Maybe a lower-down executive will listen to you if you present them with the facts.",
-  "21" => "MOC is in fact concealing the truth behind their inadequate technology for Agrana’s geological set-up. While they do have new technology, they will likely be using older machinery to drill, which could lead to leaks and spills. They are disregarding this risk to Agrana because it will cut costs and they will largely benefit from this deal. You find yourself in a conundrum. Do you betray your company for the well being of Agrana or do you maintain loyalty? Should you give an anonymous tip to a local journalist about the disregard of responsible equipment?",
-  "22" => "You’re planning on using older machinery in the drilling process to cut costs. You know that many people will question this decision and the risks involved, but it is perfectly safe! If any leaks happen, they will be small. It's worth it to get rid of this equipment that’s been sitting around. <br><br>Also, some people have asked what chemicals you use in the fracking process - this is proprietary information and it annoys you that anyone would expect you to share this. They wouldn’t understand the science behind the mixture in the fracking fluid, anyway.",
-  "23" => "You’ve heard that the president’s approval ratings are iffy. With a reelection campaign approaching, you know that a campaign donation from MOC would give the President a campaign boost, and also influence him to lean in favor of a large-scale drilling project. You have close ties with many executives at MOC and think you can pull the right strings. <br><br>In return, MOC has requested that your policy ideas should allow room for loopholes to further benefit their company - such as less regulation.",
-  "24" => "You learn from your activism network exactly how much water WILL be used: between 4.5 and 6.0 million gallons of water per well - and the plan is to drill 5,000 wells over the next ten years. This doesn’t even include the amount of water that could potentially be contaminated. <br><br>You make it your mission to share this information with as many people as possible. ",
-  "25" => "Another activist shares information about exactly how much water this project will use. In the Middle East, based on the case studies accounting for the rock formations found in the region, around 4.5- 6.0 million gallons of water would be needed to operate one traditional horizontal well hydraulic fracturing operation - and there will be way more than just one. You decide to organize a small protest in Agrana City to voice your concerns.",
-  "26" => "Some of the proposed fracking wells are located next to an aquifer (groundwater) that is vital to several large farms and communities in the area. You’ve read in past news that fracking in the United States, in the state of Pennsylvania, has led to groundwater contamination. You’ve even seen videos of people setting their tap water on fire because of how polluted it is! This scares you - you don’t want your area to become the next big news piece. ",
-  "27" => "You hear that a local activist group fighting for water rights and water conservation has organized a small protest in Agrana City. You’re excited to try to join forces with this group to protest this deal - if you put enough pressure on the government, they might consider more renewable energy sources! <br><br>Also, you learn that fracking can cause groundwater use to go up by 30 percent in some arid regions - this statistic shocks you, and you need to spread the word. ",
-  "28" => "You recently read in the newspaper that the President’s approval ratings have declined. He has never been an advocate of open space and conservation, and the Al Shaeb Party (who are running in the reelection) have listed it as a priority. <br><br>Though you’ve never been a fan of politics, you’re considering advocating for the Al Shaeb Party and spreading awareness of their conservation priorities. ",
-  "29" => "You have been informed by a contact in the government that your protest is causing a lot of fear. The Region 2 Representative is particularly worried by the unrest in the streets and doesn’t want anything to get out-of-hand. <br><br>You read a study done by Cornell University, in the United States, which found that increasing methane in the atmosphere (which contributes greatly to climate change) can be traced back to shale oil and gas - from fracking. If the study is correct, there is a direct correlation between the recent rise of methane and the fracking boom that has been happening over the last decade. You don’t want Agrana to make this issue worse and be part of the climate catastrophe!",
-  "30" => "You learn from an industry friend some information about the oil industry’s effects on fragile infrastructure - one well, over its lifetime, can require up to 400 truck trips for the transport of water and up to 25 rail cars’ worth of sand. It can cause as much damage to local roads as nearly 3.5 million car trips. This is for a single well, and Agrana would be implementing up to 5,000 over the next ten years. <br><br>Unless Agrana injects revenue into infrastructure, this project could cause bridges, roads, and railways to crumble (literally) even more than they already are.",
-  "31" => "After working on an economic plan with the President’s office and the oil company you’ve realized that the revenue you would get from drilling is much less than what was promised. Most of the money would go to security and military upgrades. You still think that being energy independent is vital for Agrana, and the amount of revenue from oil and gas would be HUGE - economic development would still get a share, right?",
-  "32" => "At a meeting, you overhear two MOC representatives discussing the possible use of outdated materials in Agrana’s future drilling sites. You suspect they want to save money by using worn down and risky machinery and technology - but this could lead to spills. <br><br>Your fears of environmental harm are even greater now. Plus, this is a classic case of environmental injustice - putting certain populations (the poor and rural communities in Agrana) at greater risk of environmental harm than others. ",
-  "33" => "You learn that there are 5,000 wells being planned in Agrana over the course of the next ten years - this is far more than you’re comfortable with, even if it happens over the course of years. You try to convene a meeting with other Ministers and the President, but they seem to be avoiding you. On top of this, you receive a letter from a university professor and their students urging you to fight the deal. You feel obligated to stand by your agreement with the Minister of Energy, but you are feeling very on the fence about the idea of excessive drilling.",
-  "34" => "After finding out about a potential strike among farmers in Region 1 and 3, you are very fearful of the consequences. A strike would cause mass food shortages and strike panic and anger among the public. You need to inform the government of this and warn them about the grave consequences of a farm strike. The instability that this would cause is far greater than that of the energy shortages. ",
-  "35" => "After looking over the allocation of fracking funds, you are very unhappy with the plan the government has come up with. You had requested that a portion of the revenue be allocated to Human Services, which you had planned on using for improving access to health care and food service programs for those in the least developed areas of Agrana. Most of the money will likely be allocated to the security and military sector. If you are to support the fracking deal, there need to be some major changes in the allocation of money. You think you have enough experience to convince other government officials to rethink the allocations.",
-  "36" => "An Esmal Oil and Gas Union representative has been complaining that MOC will not publicly share what chemicals they use in their fracking fluid - while you understand why this is frustrating, you also know that many oil companies don’t share this proprietary information. <br><br>However, you could use this piece of information to your advantage by portraying MOC as secretive and untrustworthy. Whatever will keep Agrana as an importer.",
-  "37" => "You overheard two MOC representatives talking about how they are planning on using old fracking technology and equipment that has been worn, and now sitting around unused, for years. You are shocked! The potential environmental damages from faulty equipment could be expensive to fix and even irreversible. You must warn Agrana and get them to vote against this dangerous and irresponsible deal! ",
-  "38" => "You’ve heard from an Esmal Oil representative that MOC is planning to use sub-par technology and machinery in their drilling projects in Agrana in order to cut costs. This is typical of MOC, but still concerning, and you feel that you should let Agrana know before they set this deal in stone. <br><br>Also, you hear that anti-fracking protests are starting in the streets of Agrana City. Though this doesn’t concern you now, you worry that this energy could carry over to people in Esmal who have had bad blood toward oil companies for years - the last thing Esmal needs right now is civil unrest. You need to keep the peace.",
-  "39" => "You have recently been informed that Farmers and NGO workers have been planning a farm strike. If the fracking deal passes, farmers in Region 1 and 3 are planning on going on strike immediately. This would really disrupt the food supply in Agrana as Region 1 and 3 are the largest agricultural producers. The threat of a farm strike will add a lot of pressure to the government to vote against the fracking deal, which would play in your favor...",
-  "40" => "You’ve learned from a government worker that Esmal may cut off Agrana’s access to the port if the fracking deal goes through. Esmal Oil doesn’t want to lose business in Agrana, but you fear you will lose out on potential gains from Agrana’s oil exports if Esmal discourages their progress.",
-  "41" => "The Prime Minister has informed you that Esmal may cut off Agrana’s access to the Port of Esmal if the deal passes. This would really hurt Agrana’s economy and make it very difficult for them to export oil. The Prime Minister of Esmal is worried that if they don’t take a strong stance, they may lose their next election. Esmalians are very concerned about Agrana passing the fracking deal - if Esmal Oil loses Agrana as an importer of oil, they may struggle to make up some of the losses and will have to scramble to find clients elsewhere.",
-  "42" => "After a discussion with the Esmalian Ambassadors you have been informed that if the deal passes, Agrana may be cut off from the Port of Esmal. The Port if Esmal is essential to the Agranian Economy for both exporting and importing goods. You are increasingly  worried by the consequences of this deal. <br><br>Additionally, other countries have been pressuring you to advocate for clean energy and action on climate change - something that the President has blatantly ignored. If the deal fails to go through, it could be a great opportunity to catch up with other nations’ climate efforts and put Agrana on the map as an innovator.",
-  "43" => "The President’s office has informed you that a large portion of the revenue from fracking would be allocated to the security and military sector. You are thrilled by the news! The military will finally have the proper funding needed to protect the people of Agrana. <br><br>One of your aide’s reminds you that between one-quarter and one-half of all interstate wars since 1973 have been linked to oil - you don’t want Agrana to become part of that statistic.",
-  "44" => "You recently found out that the President’s approval rating is down. The potential of big oil coming in has brought a lot of attention to the Ghalibia Party’s disregard for the people of Agrana, and many Agranians are frustrated and ready for change. You are hoping that this means the deal will not have enough support to be passed and that your party may be in power soon. <br><br>You learn that MOC is planning to drill 5,000 wells over the next ten years, costing upwards of $15 billion - oil and gas are finite resources and wells will only last ten to twenty years. By then, the rest of the world will be using renewables! Is the infrastructure and investment really worth it?",
-  "45" => "You have been told by a colleague who works in the Ministry of Finance that the revenue from fracking may almost entirely be allocated to military and security projects. Very little of the revenue would be invested back into the people of Agrana, and this frustrates you. They may be spending $15 billion over the next ten years to implement this plan, and while the returns from oil and gas will be enormous, you do fear that potentially little of that will come back to the people.",
-  "46" => "You have your staff do some research and learn that on the Arabian Peninsula (not far from you),  84 percent of total water withdrawals come from groundwater, and demand for groundwater can go up by nearly 30% in some arid regions if fracking is implemented. 30% increases in water use would devastate your region. <br><br>Also, you learn from a journalist that MOC is planning to put 2,500 wells in Region 3 - where are they going to get all that land?",
-  "47" => "Representative 4 has just informed you that spills during the handling of hydraulic fracturing fluids and chemicals can reach groundwater resources - in an area of the United States, the water in 141 water wells near fracking sites found that methane was detectable in 82% of drinking water samples. Those concentrations were six times higher in homes that were less than a kilometer away from natural gas wells - and you know that many poor Agranians will be very close to some of these sites. Now you completely trust your representative and must work with them to fight drilling.",
-  "48" => "You discover that the Handy People Union is going to protest in the streets against anti-frackers. Use this opportunity to further push your ideals and network with voters! <br><br>You decide to run an ad in local media highlighting the fact that fracking operations are temporary - fracking itself is only 3 to 4 days of a well’s lifetime, which can last 10 to 20 years! Plus, domestic drilling reduces dependence on foreign oil - this is important.",
-  "49" => "You decide to counter-protest the anti-frackers who have been gathering in front of government buildings in Agrana City. They need to learn the difference between fact and fiction! <br><br>You decide to pass out flyers at the protest listing the benefits of fracking, including:<br><ul><li>Natural gas (which is most of what will be drilled for in Agrana) burns cleaner than oil and coal</li><li>Reduces dependence on foreign oil </li><li>Uses less water use than coal</li><li>Operations are temporary - fracking itself is only 3 to 4 days of a well’s lifetime, which can last 10 to 20 years!</li></ul>",
-  "50" => "You learn that MOC is planning to drill 5,000 wells in Agrana over the next 10 years. This could be good, as they may turn to your company for sourcing some of the materials needed in the fracking process. However, they may also snatch up some of the land you’ve had your eye on for mining projects. <br><br>After seeing the anti-fracking protests break out in Agrana City, you are worried that the deal won't pass. ",
-  "51" => "You just found out that damaging information about MOC and their fracking equipment may be leaked to the press. The fracking technology MOC plans on using is old and not up-to-date with the best technology. This information could tank the deal - and your investments. <br><br>You consider going to the press and slipping them some cash to keep quiet. Who cares about a little bit of bribery?",
-  "52" => "The President's office may allocate almost all of the potential revenue from oil and gas toward security and military projects (as well as raises for top Ghalibia party officials!). The more you learn about the financial details of the fracking deal, the worse you feel about it. The Ghalibia Party is using this deal as a personal  financial opportunity rather than investing the money back into the people of Agrana. You are fed up with laying low and are considering leaking this information to the press. ",
-  "53" => "Fracking is a big contributor of methane emissions - you learn that methane released during extraction and transport of oil and natural gas is 86 times more potent a greenhouse gas than carbon dioxide over the course of 20 years. Yikes! <br><br>Also, you’ve heard that MOC has offered large donations of money to several important people - including a local nonprofit. This is downright bribery and it enrages you! It seems that this oil company is in the government’s pocket, and you need to do something about it.",
-  "54" => "You learn from an industry friend that the average cost to establish one well is around $7,600,000. You’ve also read in the paper that 2,000 wells are being proposed throughout the country - that’s over 15 BILLION dollars being put into this long-term project. The revenue will be enormous, but what if it doesn’t go to the places where it is needed most? <br><br>These numbers have your head spinning.",
-  "55" => "You read about a magnitude 4.0 earthquake in Texas in 2018 caused by hydraulic fracturing. This both fascinates and scares you. <br><br>Also, a friend at the University tells you there are rumors that MOC may use older equipment for fracking and drilling. You wonder if sketchier machinery could possibly be more likely to cause small earthquakes - though the risk is small, this is still a concern that no one is taking into consideration.",
-  "56" => "A team of journalists pitch the idea of releasing a newspaper that features a collection of information about the deal that each journalist from your post will gather. You are thrilled about this idea and approve of their pitch. They are currently working to put this newspaper together. You plan to publish 24 hours before the vote. It is your mission to inform the public on what you know! #TheWorldNeedsJournalists <br><br>Work with others to gather information on MOC and the fracking deal for this release - before the deal passes! (This may take some digging and persuasion...)",
-  "57" => "You find out that the Esmali government plans to cut off Agrana’s access to the port if the deal is passed. This means that Agrana might be placed in an undesirable situation. Port cut-off would hurt Agrana’s economy and make it difficult for them to export oil. <br><br>Also, you’ve heard some rumors of bribery going around. This corruption needs to be exposed - time to do some digging.",
-  "58" => "Most of Agrana’s fracking will provide natural gas, which burns cleaner than coal and oil. This is a step in the right direction, not to mention the fact that domestic drilling would reduce or eliminate the need to rely on foreign oil! You decide to release an article in which you provide facts and evidence about these benefits. <br><br>You receive a death threat from a radical anti-fracking activist warning that if you publish another opinion piece in favor of fracking, they will come after you. You decide that journalism is too important to let this threat get in the way of your right to freedom of speech. ",
-  "59" => "You capture the following footage, which you plan to provide to trusted media sources in Agrana and elsewhere:<br><ul><li>A photograph of the Agranian President meeting with military officials and oil and gas executives. This meeting would only make sense if all parties were in on something together - or if there were a potential threat.</li><li>A Maghreb Oil Company Representative meeting with a representative for a local NGO. This is a juicy picture you snap as the NGO representative works with Regions 3 and 4 on issues of education and rural development. This interaction between both representatives is mysterious. </li></ul>",
-  "60" => "You decide to report on the possible dangers of fracking, as you know this will stir the pot, but you also throw in some pro-oil interviews and ads. You get some angry letters and emails questioning your legitimacy and trustworthiness as a reporter for not choosing a side, but that doesn’t matter to you. Why do you need to be popular and trusted by everyone? <br><br>Then, you get an anonymous tip that MOC may be using bribery to get their way with certain politicians and locals. You MUST report on this - it will be a killer story! But... will viewers believe you after your integrity has been questioned?",  
-  "777" => "Aliens will arrive next Thursday! You saw the mothership coming yourself! This is undeniable proof that the president is an extraterrestrial being sent by the Martian government!"
-];
 
 
-function form_secret($n, $pwd){
-  echo '<div class="container">';
-  echo '<form action="/ngs2022charcard" method="post">';
 
-  echo '<input id="charnum" value="';
-  echo $n;
-  echo '" name="charnum" type="hidden" readonly /><br>';
+function display_live_page($year)
+{
+  $final_string = "";
 
-  echo '<input id="usrpwd" value="';
-  echo $pwd;
-  echo '" name="usrpwd" type="hidden" readonly/><br>';
+  // if the character number has been chosen
+  if(isset($_POST["character-number"]) && $_POST["character-number"] > 0 && isset($_POST["password"]))
+  {
+    $character_number = $_POST["character-number"];
 
-  echo '<label for="usrsecret">Secret: &nbsp; </label><input id="usrsecret" name="usrsecret" type="password"/> &nbsp;';
-  echo '<input type="submit" value="Unlock" />';
-  echo '</form>';
-  echo '</div>';
-}
-?>
+    $password = $_POST["password"];
+
+    $secret_password = "";
+
+    $years = get_posts([
+    'post_type' => 'year',
+    'post_status' => 'publish',
+    'numberposts' => -1,
+    'order'    => 'ASC',
+    'meta_query' => [
+        [
+          'key' => 'year',// this key is advance custom field: type post_object
+          'value' => $year,
+        ], 
+      ], 
+    ]); // end $years = get_posts
+
+    // colect admin and secret password for current year
+    foreach($years as $current_year)
+    {
+      
+        $admin_password = get_post_meta($current_year->ID, 'admin-password', true);
+
+        $secret_password = get_post_meta($current_year->ID, 'secret-password', true);;
+            
+    } // end foreach
+
+    $characters = get_posts([
+      'post_type' => 'character',
+      'post_status' => 'publish',
+      'numberposts' => -1,
+      'order'    => 'ASC',
+      'meta_query' => [
+        [
+          'key' => 'year',
+          'value' => $year,
+        ], 
+        [
+          'key' => 'number',
+          'value' => $character_number,
+        ], 
+      ], 
+    ]);
+
+    foreach($characters as $character){
+          $password = get_post_meta($character->ID, 'password', true);
+
+          $character_number = get_post_meta($character->ID, 'number', true);
+
+          if($character_number == $_POST['character-number'])
+          {
+            $found_number = true;
+           
+            if(($password === $_POST['password'] || $_POST['password'] === $admin_password))
+            {
+              $found_character = true;
+
+              $final_string .= "<h2>Character " . $character_number . " information </h2> <br>";
+              $final_string .= "<strong><i>Feel free to share this information with others.</i></strong><br><br><hr><br>";
+              $final_string .= "<b>Position</b>: " . get_post_meta($character->ID, 'character-title', true) . "<br>";
+              $final_string .= "<br><b>Profile</b>: " . get_post_meta($character->ID, 'profile', true) . "<br>";
+              $final_string .= "<br><b>Goal</b>: " . get_post_meta($character->ID, 'goal', true) . "<br>";
+              
+              $final_string .= "<h2> Insider Information </h2> <br>";
+
+              echo 'SECRET:::' . $secret_password;
+
+              if ($secret_password === $_POST['secret-password']) {
+                $final_string .= "<strong><i>This is privileged information that only you have access to. Be careful who you  share it with.</i></strong><br><br><br>";
+                $final_string .= get_post_meta($character->ID, 'insider-info', true) . "<br><br>";
+              
+              } // end if 
+
+              else {
+                $final_string .= '<div class="container">';
+                $final_string .= '<form action="#" method="post">';
+
+                $final_string .= '<input name="character-number" id="character-number" type="number" value='.$_POST['character-number']. ' type="hidden" style="display:none;" readonly/>';
+  
+                $final_string .= '<input name="password" id="password" type="password" value='.$_POST['password'].' type="hidden" style="display:none;" readonly/>';
+
+                $final_string .= '<label for="secret-password">Secret Password: </label>';
+                $final_string .= '<input id="secret-password" name="secret-password" type="password"/>';
+
+                $final_string .= '<input type="submit" value="Unlock" />';
+                $final_string .= '</form>';
+                $final_string .= '</div>';
+
+              } // end else
+
+            } // end if
+            
+          } // end if
+
+      } // end foreach
+
+      if (!$found_number) {
+
+        $final_string .= "<form action='#' method='post'> 
+        <h4>Character Not Found</h4> 
+        <input type='submit' value='Retry Login Attempt'/>
+
+        </form";
+
+        $final_string .= "";
 
 
-<?php
-$foundnum = 0;
-$foundpwd = 0;
 
-foreach ($info_text as $key => $val) {
-  if ($num == $key) {
-    $foundnum = 1;
-    if ($usrpwd == $pwd[$key] or $usrpwd == $adminpwd) {
-     $foundpwd = 1;
-     echo "<h2>Character ", $num, " information </h2> <br>";
-     echo "<strong><i>Feel free to share this information with others.</i></strong><br><br><hr><br>";
-     echo "<b>Position</b>: ", $position[$key], "<br>";
-     echo "<br><b>Profile</b>: ", $val, "<br>";
-     echo "<br><b>Goal</b>: ", $goal_text[$key], "<br>";
-     echo "<h2> Insider Information </h2> <br>";
-     if ($usrsecret == $secretpwd) {
-       echo "<strong><i>This is privileged information that only you have access to. Be careful who you  share it with.</i></strong><br><br><hr><br>";
-       echo $insider_text[$key], "<br><br><hr>";
-     } 
-   }
-  }
-}
+      } // end if
 
-if ($foundnum == 0) {
-  echo "Bad character number.";
-} else {
-  if ($foundpwd == 0) {
-    echo "Bad password";
-  }
-}
+      else {
 
-?>
+        if (!$found_character) {
+
+          $final_string .= "<form action='#' method='post'> 
+          <h3>Incorrect Password</h3> 
+          <input type='submit' value='Retry Login Attempt'/>
+  
+          </form";
+
+
+
+        } // end if
+
+      } // end else
+
+  } // end if
+
+  else
+  {
+    $final_string .= '<div class="container">
+            <form action="" method="post">
+              <label for="character-number">Character Number: </label>
+              <input id="character-number" name="character-number" type="number" min="1" max="777" required/>
+
+              <label for="admin-password">Password: </label>
+              <input id="password" name="password" type="password" required /><br>
+
+              <!--<input id="secret-password" name="secret-password" type="hidden" /> -->
+              
+              <input type="submit" value="Submit" />
+
+            </form>
+          </div>';
+  } // end else
+
+  return $final_string;
+  
+} // end function display_live_page($year
+
+add_shortcode('nextgensim-application', 'display_live_page');

@@ -38,7 +38,7 @@ if (isset ($_POST['character-year-input']) && isset($_POST['character-number-inp
     {
         $character_id = $post->ID;
         $duplicate = true;
-        echo "<h2>Duplicate/s Found and Updated:</h2><h3 style='color:maroon;'>Character number: " . $_POST['character-number-input'] . "<br> Year: ". $_POST['character-year-input'] . "<br></h3>";
+        echo "<h2>Duplicate Found and Updated:</h2><h3 style='color:maroon;'>Character number: " . $_POST['character-number-input'] . "<br> Year: ". $_POST['character-year-input'] . "<br></h3>";
         echo '<hr width="50%" align="left">';
     }
     // if post year and number exist

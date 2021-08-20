@@ -1,14 +1,22 @@
-.profile
+#add-year-submit
 {
-    overflow: hidden;
-    height: 20px;
-    max-height: 20px !important;
+    margin-left: 120px;
+    background-color: lightgray;
+    border-radius: 6px;
+    color: black;
+    padding: 12px;
+    padding-right:18px;
+    padding-left:18px;
+    text-align: center;
+    font-size: 14px;
 }
+
 
 #new-character-form
 {
     width: 600px;
 }
+
 label, input, textarea
 {
     margin-bottom: 14px;

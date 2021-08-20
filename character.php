@@ -74,8 +74,8 @@ function nextgensim_cpt_init()
         'add_new'            => null,
         'add_new_item'       => null,
         'new_item'           => null,
-        'edit_item'          => __('Edit Character'),
-        'view_item'          => __( 'View Character'),
+        'edit_item'          => null,
+        'view_item'          => null,
         'all_items'          => __( 'View Characters'),
         'search_items'       => __( 'Search Characters'),
         'parent_item_colon'  => __( 'Parent Characters:'),
@@ -91,7 +91,7 @@ function nextgensim_cpt_init()
 		'exclude_from_search'=> true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
-		'show_in_menu'       => false, /** 'nextgensim-settings',  false when in production */
+		'show_in_menu'       => 'nextgensim-settings',
 		'query_var'          => true,
 		'show_in_nav_menus'  => false,
 		'rewrite'            => array( 'slug' => 'character' ),
@@ -104,7 +104,6 @@ function nextgensim_cpt_init()
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_icon'          => 'dashicons-rest-api',
-        'supports'           => array( 'my_feature', array( 'field' => 'value' ) )
 	); // end $args = array
 
 	register_post_type( 'character', $args );
@@ -130,16 +129,14 @@ function nextgensim_edit_character_columns()
 {
 	return array(
 		'cb'           => '&lt;input type="checkbox" />',
-		'title'		   => 'title',
+		'title'		   => __('Title'),
         'date'         => __( 'Last Edited' ),
         'year'         => __('year'),
 		'number'       => __('number'),
-		'character-title' => __( 'character-title' ),
+		'character-title' => __( 'Title' ),
         'profile'      => __( 'Profile' ),
-        'goal'         => __( 'Goal' ),
         'insider-info' => __( 'Insider Info' ),
-        'district'     => __( 'District' ),
-        'coalition'    => __( 'Coalition' ),
+		'goal'         => __( 'Goal' ),
         'password'     => __( 'Password' ),
 	); // end return
 
@@ -156,83 +153,91 @@ function nextgensim_manage_character_columns( $column, $post_id )
 	switch( $column ) {
 
 		case 'title' :
-			$title = get_post_meta( $post_id, 'title', true );
-                        if ( empty( $title ) ){echo __( '' );}
-                        else{echo __( $title ) ;}
+			echo get_post_meta( $post_id, 'title', true );
                         break;
 
         case 'date' :
-			$date = get_post_meta( $post_id, 'date', true );
-                        if ( empty( $date ) ){echo __( '' );}
-                        else{echo __( $date ) ;}
+			echo get_post_meta( $post_id, 'date', true );
                         break;
 
         case 'year' :
-			$year = get_post_meta( $post_id, 'year', true );
-                        if ( empty( $year ) ){echo __( '' );}
-                        else{echo __( $year ) ;}
-                        break;
+			echo get_post_meta( $post_id, 'year', true );
+			break;
 
 		case 'number' :
-			$number = get_post_meta( $post_id, 'number', true );
-						if ( empty( $number ) ){echo __( '' );}
-						else{echo __( $number ) ;}
+			echo get_post_meta( $post_id, 'number', true );
 						break;
 
 		case 'character-title' :
-			$title = get_post_meta( $post_id, 'character-title', true );
-                        if ( empty( $title ) ){echo __( '' );}
-                        else{echo __( $title ) ;}
+			echo get_post_meta( $post_id, 'character-title', true );
                         break;
 		
         case 'profile' :
-			$profile = get_post_meta( $post_id, 'profile', true );
-                        if ( empty( $profile ) ){echo __( '' );}
-                        else{echo __( substr($profile, 0, 32) ) ;}
+			echo get_post_meta( $post_id, 'profile', true );
                         break;     
 
-        case 'goal' :
-			$goal = get_post_meta( $post_id, 'goal', true );
-                        if ( empty( $goal ) ){echo __( '' );}
-                        else{echo __( substr($goal, 0, 32)  ) ;}
-                        break;   
-
         case 'insider-info' :
-			$insider_info = get_post_meta( $post_id, 'insider-info', true );
-                        if ( empty( $insider_info ) ){echo __( '' );}
-                        else{echo __( substr($insider_info, 0, 32)  ) ;}
+			echo get_post_meta( $post_id, 'insider-info', true );
                         break; 
 
+		case 'goal' :
+			echo get_post_meta( $post_id, 'goal', true );
+						break;   
+
         case 'region' :
-            $region = get_post_meta( $post_id, 'region', true );
-                        if ( empty( $region ) ){echo __( '' );}
-                        else{echo __( $region ) ;}
+            echo get_post_meta( $post_id, 'region', true );
                         break; 
 
         case 'password' :
-			$password = get_post_meta( $post_id, 'password', true );
-                        if ( empty( $password ) ){echo __( '' );}
-                        else{echo __( $password ) ;}
+			echo get_post_meta( $post_id, 'password', true );
                         break; 
         
-
-        case 'district' :
-			$district = get_post_meta( $post_id, 'district', true );
-                        if ( empty( $district ) ){echo __( '' );}
-                        else{echo __( $district ) ;}
-                        break;
-
-        case 'coalition' :
-			$coalition = get_post_meta( $post_id, 'coalition', true );
-                        if ( empty( $coalition ) ){echo __( '' );}
-                        else{echo __( $coalition ) ;}
-                        break; 
-
 		default :break;
 
 	} // end switch
 
 } // end function nextgensim_manage_character_columns
+
+add_filter( 'manage_edit-character_sortable_columns', 'set_custom_character_sortable_columns' );
+
+function set_custom_character_sortable_columns( $columns ) {
+  $columns['year'] = 'year';
+
+  return $columns;
+}
+
+function character_custom_orderby( $query ) {
+  if ( ! is_admin() )
+    return;
+
+  $orderby = $query->get( 'orderby');
+
+  if ( 'year' == $orderby ) {
+    $query->set( 'meta_key', 'year' );
+    $query->set( 'orderby', 'meta_value_num' );
+  }
+
+}
+
+
+
+function my_admin_column_width() {
+    echo '<style type="text/css">
+		.column-title { display:none; }
+		.column-date { display:none; }
+		.column-year { text-align: left; width:5% !important; overflow:hidden }
+		.column-number { text-align: left; width:5% !important; overflow:hidden }
+		.column-character-title { text-align: left; width:12% !important; overflow:hidden }
+        .column-profile { text-align: left; width:25% !important; overflow:auto; }
+		.column-insider-info { text-align: left; width:25% !important; overflow:auto }
+        .column-goal{ text-align: left; auto !important; overflow:auto }
+		.level-0, .level-0 *{ max-height: 120px; overflow: auto;}
+    </style>';
+}
+
+add_action('admin_head', 'my_admin_column_width');
+
+add_action( 'pre_get_posts', 'character_custom_orderby' );
 
 //Initialize Custom Post Type (CPT) 'character'
 add_action( 'init', 'nextgensim_cpt_init' );

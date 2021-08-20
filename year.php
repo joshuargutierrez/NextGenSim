@@ -91,7 +91,7 @@ function nextgensim_year_cpt_init()
 		'exclude_from_search'=> true,
 		'publicly_queryable' => true,
 		'show_ui'            => true,
-		'show_in_menu'       => 'nextgensim-settings', 
+		'show_in_menu'       => 'nextgensim-settings',
 		'query_var'          => true,
 		'show_in_nav_menus'  => false,
 		'rewrite'            => array( 'slug' => 'year' ),
@@ -103,7 +103,6 @@ function nextgensim_year_cpt_init()
 		'map_meta_cap' => true,
 		'has_archive'        => true,
 		'hierarchical'       => false,
-		'menu_icon'          => 'dashicons-rest-api',
         'supports'           => array( 'my_feature', array( 'field' => 'value' ) )
 	); // end $args = array
 
@@ -129,18 +128,12 @@ function nextgensim_year_rewrite_flush()
 function nextgensim_edit_year_columns() 
 {
 	return array(
-		'cb'           => '&lt;input type="checkbox" />',
-		'title'		   => 'title',
-        'date'         => __( 'Last Edited' ),
-        'year'         => __('year'),
-		'number'       => __('number'),
-		'year-title' => __( 'year-title' ),
-        'profile'      => __( 'Profile' ),
-        'goal'         => __( 'Goal' ),
-        'insider-info' => __( 'Insider Info' ),
-        'district'     => __( 'District' ),
-        'coalition'    => __( 'Coalition' ),
-        'password'     => __( 'Password' ),
+		'cb'                   => '&lt;input type="checkbox" />',
+		'title'		           => __('Title'),
+        'date'                 => __( 'Last Edited' ),
+        'year'                 => __('Year'),
+		'admin-password'       => __('Admin Password'),
+		'secret-password'      => __( 'Secret Password' ),
 	); // end return
 
 } // end function nextgensim_edit_year_columns
@@ -173,60 +166,17 @@ function nextgensim_manage_year_columns( $column, $post_id )
                         else{echo __( $year ) ;}
                         break;
 
-		case 'number' :
-			$number = get_post_meta( $post_id, 'number', true );
-						if ( empty( $number ) ){echo __( '' );}
-						else{echo __( $number ) ;}
+		case 'admin-password' :
+			$password = get_post_meta( $post_id, 'admin-password', true );
+						if ( empty( $password ) ){echo __( '' );}
+						else{echo __( $password ) ;}
 						break;
 
-		case 'year-title' :
-			$title = get_post_meta( $post_id, 'year-title', true );
-                        if ( empty( $title ) ){echo __( '' );}
-                        else{echo __( $title ) ;}
-                        break;
-		
-        case 'profile' :
-			$profile = get_post_meta( $post_id, 'profile', true );
-                        if ( empty( $profile ) ){echo __( '' );}
-                        else{echo __( substr($profile, 0, 32) ) ;}
-                        break;     
-
-        case 'goal' :
-			$goal = get_post_meta( $post_id, 'goal', true );
-                        if ( empty( $goal ) ){echo __( '' );}
-                        else{echo __( substr($goal, 0, 32)  ) ;}
-                        break;   
-
-        case 'insider-info' :
-			$insider_info = get_post_meta( $post_id, 'insider-info', true );
-                        if ( empty( $insider_info ) ){echo __( '' );}
-                        else{echo __( substr($insider_info, 0, 32)  ) ;}
-                        break; 
-
-        case 'region' :
-            $region = get_post_meta( $post_id, 'region', true );
-                        if ( empty( $region ) ){echo __( '' );}
-                        else{echo __( $region ) ;}
-                        break; 
-
-        case 'password' :
-			$password = get_post_meta( $post_id, 'password', true );
-                        if ( empty( $password ) ){echo __( '' );}
-                        else{echo __( $password ) ;}
-                        break; 
-        
-
-        case 'district' :
-			$district = get_post_meta( $post_id, 'district', true );
-                        if ( empty( $district ) ){echo __( '' );}
-                        else{echo __( $district ) ;}
-                        break;
-
-        case 'coalition' :
-			$coalition = get_post_meta( $post_id, 'coalition', true );
-                        if ( empty( $coalition ) ){echo __( '' );}
-                        else{echo __( $coalition ) ;}
-                        break; 
+		case 'secret-password' :
+			$secret = get_post_meta( $post_id, 'secret-password', true );
+						if ( empty( $secret ) ){echo __( '' );}
+						else{echo __( $secret ) ;}
+						break;
 
 		default :break;
 
