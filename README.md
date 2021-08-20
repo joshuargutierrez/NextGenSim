@@ -12,3 +12,15 @@ Simply download the zip file, and install usi8ng your WordPress plugin manager i
 
 # support
 For bug reports and technical please feel free to contact me any time *joshuarg@nmsu.edu*
+
+# Developer Notes
+
+1. This program creates two custom post types (CPT), Character and Year
+  - 'character' => [character title, year, profile, character number, insider info, goal, password]
+  - 'year'      => [year, admin password, secret password]
+  
+2. These CPTs are then used to create a list of characters for individual years
+  - Each character can only have one year
+  - Each year can only contain one character number
+  - This allows loading all characters from the same year without repeating duplicate character numbers
+  
