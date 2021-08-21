@@ -130,8 +130,8 @@ function nextgensim_edit_character_columns()
 	return array(
 		'cb'           => '&lt;input type="checkbox" />',
 		'title'		   => __('Title'),
-        'date'         => __( 'Last Edited' ),
-        'year'         => __('year'),
+        'date'         => __('Last Edited'),
+        'year'         => __('Year'),
 		'number'       => __('number'),
 		'character-title' => __( 'Title' ),
         'profile'      => __( 'Profile' ),
@@ -141,6 +141,20 @@ function nextgensim_edit_character_columns()
 	); // end return
 
 } // end function nextgensim_edit_character_columns
+
+function my_admin_column_width() {
+    echo '<style type="text/css">
+		.column-title { text-align: left; width:9rem !important; overflow:hidden }
+		.column-year { text-align: left; width:5rem !important; overflow:hidden }
+		.column-date { text-align: left; width:8rem !important; overflow:hidden }
+		.column-number { text-align: left; width:6rem !important; overflow:hidden }
+		.column-character-title { text-align: left; width:11rem !important; overflow:hidden }
+        .column-profile { text-align: left; width:30rem !important; overflow:auto; }
+		.column-insider-info { text-align: left; width:20rem !important; overflow:auto }
+        .column-goal{ text-align: left; width: 8rem !important; overflow:auto }
+		.column-password{ text-align: left; width: 10rem !important; overflow:auto }
+    </style>';
+}
 
 /**
  * Determine how a character columns will be displayed
@@ -154,12 +168,11 @@ function nextgensim_manage_character_columns( $column, $post_id )
 
 		case 'title' :
 			echo get_post_meta( $post_id, 'title', true );
-                        break;
+                        break; 
 
         case 'date' :
 			echo get_post_meta( $post_id, 'date', true );
-                        break;
-
+                        break; 
         case 'year' :
 			echo get_post_meta( $post_id, 'year', true );
 			break;
@@ -202,6 +215,7 @@ add_filter( 'manage_edit-character_sortable_columns', 'set_custom_character_sort
 
 function set_custom_character_sortable_columns( $columns ) {
   $columns['year'] = 'year';
+  $columns['number'] = 'number';
 
   return $columns;
 }
@@ -217,23 +231,16 @@ function character_custom_orderby( $query ) {
     $query->set( 'orderby', 'meta_value_num' );
   }
 
+  if ( 'number' == $orderby ) {
+    $query->set( 'meta_key', 'number' );
+    $query->set( 'orderby', 'meta_value_num' );
+  }
+
 }
 
 
 
-function my_admin_column_width() {
-    echo '<style type="text/css">
-		.column-title { display:none; }
-		.column-date { display:none; }
-		.column-year { text-align: left; width:5% !important; overflow:hidden }
-		.column-number { text-align: left; width:5% !important; overflow:hidden }
-		.column-character-title { text-align: left; width:12% !important; overflow:hidden }
-        .column-profile { text-align: left; width:25% !important; overflow:auto; }
-		.column-insider-info { text-align: left; width:25% !important; overflow:auto }
-        .column-goal{ text-align: left; auto !important; overflow:auto }
-		.level-0, .level-0 *{ max-height: 120px; overflow: auto;}
-    </style>';
-}
+
 
 add_action('admin_head', 'my_admin_column_width');
 

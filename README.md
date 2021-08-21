@@ -21,6 +21,6 @@ For bug reports and technical please feel free to contact me any time *joshuarg@
   
 2. These CPTs are then used to create a list of characters for individual years
   - Each character can only have one year
-  - Each year can only contain one character number
+  - Each year can only contain one of each character number
   - This allows loading all characters from the same year without repeating duplicate character numbers
   

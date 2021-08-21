@@ -184,6 +184,27 @@ function nextgensim_manage_year_columns( $column, $post_id )
 
 } // end function nextgensim_manage_year_columns
 
+add_filter( 'manage_edit-year_sortable_columns', 'set_custom_year_sortable_columns' );
+
+function set_custom_year_sortable_columns( $columns ) {
+  $columns['year'] = 'year';
+
+  return $columns;
+}
+
+function year_custom_orderby( $query ) {
+  if ( ! is_admin() )
+    return;
+
+  $orderby = $query->get( 'orderby');
+
+  if ( 'year' == $orderby ) {
+    $query->set( 'meta_key', 'year' );
+    $query->set( 'orderby', 'meta_value_num' );
+  }
+
+}
+
 //Initialize Custom Post Type (CPT) 'year'
 add_action( 'init', 'nextgensim_year_cpt_init' );
 

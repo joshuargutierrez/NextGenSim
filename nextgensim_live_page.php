@@ -76,8 +76,8 @@ function display_live_page($year)
               
               $final_string .= "<h2> Insider Information </h2> <br>";
 
-              echo 'SECRET:::' . $secret_password;
 
+              
               if ($secret_password === $_POST['secret-password']) {
                 $final_string .= "<strong><i>This is privileged information that only you have access to. Be careful who you  share it with.</i></strong><br><br><br>";
                 $final_string .= get_post_meta($character->ID, 'insider-info', true) . "<br><br>";
